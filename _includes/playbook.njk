@@ -1,0 +1,31 @@
+---
+layout: base.njk
+---
+<article>
+  <header class="article-header">
+    <div class="container-reading">
+      <a href="/playbooks/" class="back-link">Back to playbooks</a>
+      <div class="article-meta">
+        <span class="article-issue">Playbook</span>
+        {% if readingTime %}<span class="article-pillar">{{ readingTime }} read</span>{% endif %}
+        {% if updated %}<span class="article-date">Updated {{ updated | date('%b %Y') }}</span>{% endif %}
+      </div>
+      <h1>{{ title }}</h1>
+      {% if dek %}<p class="dek">{{ dek }}</p>{% endif %}
+    </div>
+  </header>
+
+  <div class="container-reading">
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+
+    <div class="article-footer">
+      <div class="eyebrow">Go deeper</div>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.6;">
+        Browse the full <a href="/playbooks/" style="color: var(--gold); border-bottom: 1px solid rgba(255,195,0,.3);">playbook library</a>,
+        or subscribe to the <a href="/newsletters/" style="color: var(--gold); border-bottom: 1px solid rgba(255,195,0,.3);">Wednesday briefing</a> for weekly research.
+      </p>
+    </div>
+  </div>
+</article>

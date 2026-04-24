@@ -1,0 +1,5 @@
+{
+  "layout": "playbook.njk",
+  "tags": "playbook",
+  "permalink": "/playbooks/{{ page.fileSlug }}/"
+}

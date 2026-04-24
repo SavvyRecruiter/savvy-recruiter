@@ -1,0 +1,31 @@
+---
+layout: base.njk
+---
+<article>
+  <header class="article-header">
+    <div class="container-reading">
+      <a href="/newsletters/" class="back-link">Back to newsletters</a>
+      <div class="article-meta">
+        {% if issue %}<span class="article-issue">Issue {{ issue }}</span>{% endif %}
+        {% if pillar %}<span class="article-pillar">{{ pillar }}</span>{% endif %}
+        <span class="article-date">{{ date | date('%d %b %Y') }}</span>
+      </div>
+      <h1>{{ title }}</h1>
+      {% if dek %}<p class="dek">{{ dek }}</p>{% endif %}
+    </div>
+  </header>
+
+  <div class="container-reading">
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+
+    <div class="article-footer">
+      <div class="eyebrow">Read next</div>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.6;">
+        Browse all issues in the <a href="/newsletters/" style="color: var(--gold); border-bottom: 1px solid rgba(255,195,0,.3);">newsletter archive</a>,
+        or explore the <a href="/playbooks/" style="color: var(--gold); border-bottom: 1px solid rgba(255,195,0,.3);">playbook library</a>.
+      </p>
+    </div>
+  </div>
+</article>

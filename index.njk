@@ -1,0 +1,532 @@
+---
+layout: base.njk
+title: Proof of Work Sourcing
+description: Weekly research, playbooks, and tool benchmarks from Brendan Williams. Proof of Work Sourcing for ML and robotics hiring. 28 briefs tested. 200+ recruiters trained.
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <span class="hero-tag-dot" aria-hidden="true"></span>
+        <span class="hero-tag-text">Weekly · Wednesdays 10am London</span>
+      </div>
+      <h1>
+        Proof of Work<br>
+        Sourcing for <span class="accent">ML and robotics</span> hiring.
+      </h1>
+      <p class="hero-sub">
+        Weekly research, playbooks, and tool benchmarks from <strong>Brendan Williams</strong> —
+        AI Sourcing Specialist at First2 Group. Tested across 28 client briefs.
+        200+ recruiters trained. Evidence over resumes. <strong>Always free.</strong>
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/newsletters/" class="btn btn-primary">Read the newsletter</a>
+        <a href="/playbooks/" class="btn btn-ghost">Browse playbooks</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="credentials" aria-label="Credentials">
+  <div class="container">
+    <div class="credentials-grid">
+      <div class="credential">
+        <div class="credential-num">28</div>
+        <div class="credential-label">Client briefs<br>field-tested</div>
+      </div>
+      <div class="credential">
+        <div class="credential-num">200+</div>
+        <div class="credential-label">Recruiters<br>trained 2025</div>
+      </div>
+      <div class="credential">
+        <div class="credential-num">~270</div>
+        <div class="credential-label">ML engineers<br>sourced @ Cubiq</div>
+      </div>
+      <div class="credential">
+        <div class="credential-num">0→1</div>
+        <div class="credential-label">TA function<br>Ellison Institute Oxford</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="container">
+    <div class="manifesto-grid">
+      <div class="manifesto-heading">
+        <div class="eyebrow">Methodology</div>
+        <h2>Proof of Work<br><span class="accent">Sourcing.</span></h2>
+      </div>
+      <div class="manifesto-body">
+        <p>
+          I find ML engineers and robotics specialists through their <strong>code on GitHub</strong>,
+          their <strong>papers on arXiv</strong>, and their <strong>models on HuggingFace</strong>.
+          Not through CVs or LinkedIn keyword matching.
+        </p>
+        <div class="callout">
+          Evidence over resumes. Technical recognition over mass outreach.
+        </div>
+        <p>
+          Across 2025 I tested the full 2026 AI recruiting stack — Claude, ChatGPT, Gemini,
+          Perplexity, Juicebox, SeekOut, hireEZ, LinkedIn Hiring Assistant — on 28 client briefs at First2 Group.
+          Response rates on proof-based outreach ran <strong>30–45%</strong>.
+          Standard InMail on the same briefs ran <strong>10–25%</strong>.
+        </p>
+        <p>
+          That gap is what this site is about. The research, the playbooks, and the weekly tool
+          reviews from the lab — all free, all public, forever.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="container">
+    <div class="pillars-head">
+      <div class="eyebrow">What you get</div>
+      <h2>Three things, every Wednesday.</h2>
+      <p>
+        Not a curated link dump. Original research from the lab, scoped tight,
+        anchored to data you can act on the same day.
+      </p>
+    </div>
+    <div class="pillars-grid">
+      <article class="pillar-card">
+        <div class="pillar-num">01 / Automation</div>
+        <h3 class="pillar-title">A recipe built in n8n or Make</h3>
+        <p class="pillar-desc">
+          One automation workflow a week, copy-paste ready. Sourcing, outreach,
+          candidate research, pipeline hygiene. Screenshots, JSON, expected time saved.
+        </p>
+      </article>
+      <article class="pillar-card">
+        <div class="pillar-num">02 / Tools</div>
+        <h3 class="pillar-title">A head-to-head tool review</h3>
+        <p class="pillar-desc">
+          Real briefs, real results. hireEZ vs Juicebox on a senior ML search.
+          SeekOut vs GitHub direct. Response rates, placement rates, honest verdicts.
+        </p>
+      </article>
+      <article class="pillar-card">
+        <div class="pillar-num">03 / Contrarian</div>
+        <h3 class="pillar-title">What AI gets wrong in recruiting</h3>
+        <p class="pillar-desc">
+          The weekly contrarian take. Where the 2026 tool market breaks, where
+          the consensus is off, where direct technical engagement still wins.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="latest">
+  <div class="container">
+    <div class="latest-head">
+      <div class="eyebrow">Latest</div>
+      <h2>Recent research</h2>
+    </div>
+
+    <div class="latest-grid">
+      {% set newsletterposts = collections.newsletter | reverse %}
+      {% for post in newsletterposts | limit(2) %}
+      <a href="{{ post.url }}" class="latest-card">
+        <div class="latest-meta">
+          {% if post.data.issue %}<span class="latest-issue">Issue {{ post.data.issue }}</span>{% endif %}
+          <span class="latest-date">{{ post.data.date | date('%d %b %Y') }}</span>
+        </div>
+        <h3 class="latest-title">{{ post.data.title }}</h3>
+        {% if post.data.dek %}<p class="latest-dek">{{ post.data.dek }}</p>{% endif %}
+        <span class="latest-arrow">Read →</span>
+      </a>
+      {% endfor %}
+
+      {% set playbookposts = collections.playbook | reverse %}
+      {% for post in playbookposts | limit(1) %}
+      <a href="{{ post.url }}" class="latest-card latest-card-playbook">
+        <div class="latest-meta">
+          <span class="latest-issue latest-issue-playbook">Playbook</span>
+          {% if post.data.readingTime %}<span class="latest-date">{{ post.data.readingTime }}</span>{% endif %}
+        </div>
+        <h3 class="latest-title">{{ post.data.title }}</h3>
+        {% if post.data.dek %}<p class="latest-dek">{{ post.data.dek }}</p>{% endif %}
+        <span class="latest-arrow">Read →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+/* Page-specific styles for homepage */
+
+.hero {
+  padding: var(--s-9) 0 var(--s-8);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(255, 195, 0, .04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 6px 12px;
+  border: 1px solid var(--border-med);
+  border-radius: 99px;
+  background: rgba(255, 195, 0, .04);
+  margin-bottom: var(--s-4);
+}
+
+.hero-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(34, 197, 94, .5);
+}
+
+.hero-tag-text {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--parch);
+}
+
+.hero h1 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(42px, 7vw, 84px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--parch);
+  margin-bottom: var(--s-4);
+}
+
+.hero-sub {
+  font-family: var(--f-body);
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.6;
+  color: var(--slate);
+  max-width: 640px;
+  margin-bottom: var(--s-5);
+}
+
+.hero-sub strong {
+  color: var(--parch);
+  font-weight: 500;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.hero-ctas .btn {
+  font-size: 14px;
+  padding: 12px 22px;
+}
+
+/* ─── Credentials strip ─── */
+
+.credentials {
+  background: var(--navy);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--s-5) 0;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-4);
+}
+
+.credential {
+  text-align: left;
+  padding-right: var(--s-3);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.credential:last-child { border-right: none; }
+
+.credential-num {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: var(--s-1);
+}
+
+.credential-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--slate);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .credentials-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-3); }
+  .credential { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--s-3); }
+  .credential:nth-last-child(-n+2) { border-bottom: none; padding-bottom: 0; }
+  .credential-num { font-size: 30px; }
+}
+
+/* ─── Manifesto ─── */
+
+.manifesto { padding: var(--s-8) 0; }
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--s-7);
+  align-items: start;
+}
+
+.manifesto-heading h2 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--parch);
+  margin-bottom: var(--s-4);
+}
+
+.manifesto-body p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--parch);
+  margin-bottom: var(--s-4);
+}
+
+.manifesto-body p:last-child { margin-bottom: 0; }
+
+.manifesto-body strong {
+  color: var(--parch);
+  font-weight: 500;
+  background: linear-gradient(transparent 60%, rgba(255, 195, 0, .14) 60%);
+  padding: 0 2px;
+}
+
+.manifesto-body .callout {
+  border-left: 2px solid var(--gold);
+  padding: var(--s-2) var(--s-4);
+  margin: var(--s-4) 0;
+  background: rgba(255, 195, 0, .03);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--parch);
+  font-weight: 500;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .manifesto-grid { grid-template-columns: 1fr; gap: var(--s-5); }
+}
+
+/* ─── Pillars ─── */
+
+.pillars {
+  padding: var(--s-8) 0;
+  background: var(--navy);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pillars-head {
+  max-width: 780px;
+  margin-bottom: var(--s-6);
+}
+
+.pillars-head h2 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--s-3);
+  color: var(--parch);
+}
+
+.pillars-head p {
+  font-size: 17px;
+  color: var(--slate);
+  line-height: 1.55;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+}
+
+.pillar-card {
+  background: var(--navy2);
+  border: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  padding: var(--s-5);
+}
+
+.pillar-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: var(--s-3);
+}
+
+.pillar-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--parch);
+  margin-bottom: var(--s-3);
+  line-height: 1.15;
+}
+
+.pillar-desc {
+  font-size: 14.5px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .pillars-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Latest ─── */
+
+.latest { padding: var(--s-8) 0; }
+
+.latest-head {
+  margin-bottom: var(--s-5);
+}
+
+.latest-head h2 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--parch);
+}
+
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+}
+
+.latest-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  background: var(--navy);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-card);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.latest-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.latest-card-playbook {
+  border-left: 2px solid var(--teal);
+}
+
+.latest-meta {
+  display: flex;
+  gap: var(--s-3);
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--slate);
+}
+
+.latest-issue {
+  padding: 3px 8px;
+  background: rgba(255, 195, 0, .1);
+  border: 1px solid var(--border-med);
+  border-radius: 99px;
+  color: var(--gold);
+}
+
+.latest-issue-playbook {
+  background: rgba(0, 180, 216, .1);
+  border-color: rgba(0, 180, 216, .3);
+  color: var(--teal);
+}
+
+.latest-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  color: var(--parch);
+  line-height: 1.15;
+}
+
+.latest-dek {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.latest-arrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .latest-grid { grid-template-columns: 1fr; }
+}
+</style>

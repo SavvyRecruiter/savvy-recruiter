@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'Proof of Work Sourcing for ML and robotics hiring. Weekly research, playbooks, and tool benchmarks from Brendan Williams.' }}">
+  <title>{{ title }} — Savvy Recruiter</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ title }} — Savvy Recruiter">
+  <meta property="og:description" content="{{ description or 'Proof of Work Sourcing for ML and robotics hiring.' }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:site_name" content="Savvy Recruiter">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="/css/site.css">
+
+  <!-- Favicon: void background, gold mark -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2307111E'/%3E%3Cpath d='M6 6 L26 6 L26 26 L16 20 L6 26 Z' fill='%23FFC300'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">Savvy<span>.</span>Recruiter</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/newsletters/" {% if page.url.startsWith('/newsletters') %}class="active"{% endif %}>Newsletter</a></li>
+        <li><a href="/playbooks/" {% if page.url.startsWith('/playbooks') %}class="active"{% endif %}>Playbooks</a></li>
+        <li><a href="/about/" {% if page.url.startsWith('/about') %}class="active"{% endif %}>About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-about">
+          <h4>Savvy Recruiter</h4>
+          <p>Proof of Work Sourcing for ML and robotics hiring. Weekly research, playbooks, and tool benchmarks from Brendan Williams — AI Sourcing Specialist at First2 Group, Manchester.</p>
+        </div>
+        <div class="footer-email">
+          <h4>Get the Wednesday briefing</h4>
+          <p>One email, every Wednesday. Field-tested AI sourcing techniques, honest tool reviews, the week's best automation recipe. Free.</p>
+
+          <!-- ============================================================
+               FOOTER EMAIL CAPTURE — OPTIONAL
+               ============================================================
+               If you set up Beehiiv later and want to build an email list
+               quietly in the footer, paste the iframe embed code here,
+               replacing the .footer-embed-placeholder div below.
+               Leave as-is to keep the site pure free-resource (no email).
+               ============================================================ -->
+          <div class="footer-embed">
+            <div class="footer-embed-placeholder">
+              Email signup (optional) — paste Beehiiv iframe here when ready,<br>or leave empty to stay pure free-resource.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © {{ page.date | date('%Y') }} <strong>Savvy Recruiter</strong> · Brendan Williams · First2 Group
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://www.linkedin.com/in/brendanwilliams" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="/newsletters/">Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

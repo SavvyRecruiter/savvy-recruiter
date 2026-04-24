@@ -1,0 +1,15 @@
+{
+  "name": "savvy-recruiter",
+  "version": "1.0.0",
+  "description": "Savvy Recruiter — Proof of Work Sourcing. Free public content site for newsletters and playbooks.",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve",
+    "debug": "DEBUG=Eleventy* npx @11ty/eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "luxon": "^3.4.4",
+    "markdown-it": "^14.0.0"
+  }
+}
