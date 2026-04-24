@@ -10,12 +10,12 @@ Every recruiter says the same thing. **AI engineers are impossible to find.** Th
 
 Most senior ML engineers don't keep their LinkedIn profiles current. They don't check their InMail. They build their reputations elsewhere — in places most TA teams never systematically mine.
 
-Industry estimates suggest the global supply-demand gap in AI engineering is somewhere around **3:1** — roughly three qualified candidates for every ten open roles. The exact numbers depend on who you ask and how you define "qualified," but the direction is unambiguous. You cannot hire into that gap using LinkedIn alone. The maths doesn't work.
+The hiring market for AI engineering is the tightest it has ever been. Compensation for senior LLM roles in London has roughly doubled since 2022. You can see it in job postings, in published salary bands, in the volume of roles that sit open for 90+ days. You cannot hire into that gap using LinkedIn alone. The maths doesn't work.
 
 <div class="stat-row">
-<div class="stat"><span class="stat-number">3:1</span><span class="stat-label">Demand / supply gap</span></div>
+<div class="stat"><span class="stat-number">180M+</span><span class="stat-label">Developers on GitHub</span></div>
 <div class="stat"><span class="stat-number">2M+</span><span class="stat-label">Models on Hugging Face</span></div>
-<div class="stat"><span class="stat-number">~250</span><span class="stat-label">Kaggle Grandmasters worldwide</span></div>
+<div class="stat"><span class="stat-number">~600</span><span class="stat-label">Kaggle Grandmasters worldwide</span></div>
 </div>
 
 This playbook is how I close it.
@@ -46,7 +46,7 @@ GitHub is the highest-signal sourcing platform for ML engineers. You're not hunt
 topic:pytorch OR topic:tensorflow
 ```
 
-Returns roughly 1,200 actively-maintained ML repositories. Sort by "Recently updated" to filter out abandoned projects.
+Returns around a thousand actively-maintained ML repositories. Sort by "Recently updated" to filter out abandoned projects.
 
 ### Narrower — specific sub-domains
 
@@ -104,7 +104,7 @@ GET https://api.github.com/search/users
   &per_page=100
 ```
 
-Rate-limited to 60 requests per hour unauthenticated on the core API, 5,000/hour with a token. The Search API has its own stricter cap: 30 requests per minute authenticated, 10 per minute unauthenticated. For production sourcing, always use an authenticated token.
+Rate-limited to 60 requests per hour unauthenticated on the core API, 5,000/hour with a token. The Search API has its own stricter cap: 30 requests per minute authenticated. Code search is stricter still — 10 requests per minute authenticated. For any serious sourcing run, always use an authenticated token.
 
 ### Common mistakes to avoid
 
@@ -222,8 +222,8 @@ Kaggle is the only platform where ML talent is ranked by performance on real pro
 
 | Tier | Requirement | What it means |
 |---|---|---|
-| Grandmaster | 5 gold medals (at least 1 solo gold) | Top ~250 worldwide. Exceptional. |
-| Master | 1 gold + 2 silver medals | Top ~2,500 worldwide. Very strong. |
+| Grandmaster | 5 gold medals (at least 1 solo gold) | Top ~600 worldwide. Exceptional. |
+| Master | 1 gold + 2 silver medals | Top ~3,000 worldwide. Very strong. |
 | Expert | 2 bronze medals | Solid practitioner. Still a strong signal. |
 | Contributor | Active participation | Learning actively. Context-dependent. |
 
@@ -297,11 +297,21 @@ A representative brief:
 
 ### Step 1 — GitHub search
 
+Two queries, in sequence. First, find active ML repos with London contributors worth investigating:
+
 ```
-topic:large-language-models language:python location:London followers:>50 pushed:>2025-10-01
+# Repo search — find active LLM repos to check contributors on
+topic:large-language-models language:python stars:>100 pushed:>2025-10-01
 ```
 
-Returns roughly 40–80 engineers. Filter to those who've contributed to `huggingface/transformers` or `huggingface/peft` or `huggingface/accelerate` in the last 12 months. Typically leaves 10–15 candidates.
+Then find London-based Python engineers directly:
+
+```
+# User search — find engineers in London coding in Python
+location:London language:Python followers:>50 repos:>5
+```
+
+The user search returns a manageable shortlist in the tens, not the hundreds. Filter further to those who've contributed to `huggingface/transformers`, `huggingface/peft`, or `huggingface/accelerate` in the last 12 months by checking each profile's recent activity. Typically leaves 10–15 candidates.
 
 ### Step 2 — Hugging Face cross-reference
 
