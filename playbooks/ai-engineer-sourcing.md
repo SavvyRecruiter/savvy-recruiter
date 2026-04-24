@@ -12,6 +12,12 @@ Most senior ML engineers don't keep their LinkedIn profiles current. They don't 
 
 Industry estimates suggest the global supply-demand gap in AI engineering is somewhere around **3:1** — roughly three qualified candidates for every ten open roles. The exact numbers depend on who you ask and how you define "qualified," but the direction is unambiguous. You cannot hire into that gap using LinkedIn alone. The maths doesn't work.
 
+<div class="stat-row">
+<div class="stat"><span class="stat-number">3:1</span><span class="stat-label">Demand / supply gap</span></div>
+<div class="stat"><span class="stat-number">2M+</span><span class="stat-label">Models on Hugging Face</span></div>
+<div class="stat"><span class="stat-number">~250</span><span class="stat-label">Kaggle Grandmasters worldwide</span></div>
+</div>
+
 This playbook is how I close it.
 
 ## How to use this
@@ -107,7 +113,10 @@ Rate-limited to 60 requests per hour unauthenticated on the core API, 5,000/hour
 - **Don't judge on code quality in a single file.** Legacy repos, experiments, and half-finished side projects are normal. Look at recent work.
 - **Don't message via GitHub issues.** Use the email in their profile (if visible) or their website. Unsolicited sourcing messages in issues are frowned on.
 
-> **Worth flagging.** Some engineers actively hide their GitHub from recruiters — private email, no location, terse READMEs. This is increasingly common post-2024. If someone's profile looks deliberately sparse, respect it. Try their conference talks, their Hugging Face, or a mutual connection instead.
+<aside class="callout callout-warn">
+<span class="callout-label">Worth flagging</span>
+Some engineers actively hide their GitHub from recruiters — private email, no location, terse READMEs. This is increasingly common post-2024. If someone's profile looks deliberately sparse, respect it. Try their conference talks, their Hugging Face, or a mutual connection instead.
+</aside>
 
 ---
 
@@ -188,7 +197,10 @@ GET https://huggingface.co/api/models?author={username}
 
 Often overlooked. `huggingface.co/papers` lists papers the community has linked to models. Authors of highly-upvoted papers with model releases are a strong research-to-production pipeline signal.
 
-> **Pro tip.** Cross-reference a Hugging Face username with their GitHub username. From what I've seen, a strong majority of active ML engineers use the same handle on both. When you find a strong HF profile, run `github.com/{same-username}` to see their public code output alongside their model output.
+<aside class="callout">
+<span class="callout-label">Pro tip</span>
+Cross-reference a Hugging Face username with their GitHub username. From what I've seen, a strong majority of active ML engineers use the same handle on both. When you find a strong HF profile, run <code>github.com/{same-username}</code> to see their public code output alongside their model output.
+</aside>
 
 ### Fine-tuning vs from-scratch
 
@@ -230,7 +242,10 @@ Filter by Competitions, Datasets, Notebooks, or Discussion — four separate ran
 - **Notebooks published** — read one. Can they explain their reasoning? Do they document trade-offs? This is technical writing quality you'd pay for.
 - **Recency** — a Grandmaster who last competed in 2021 may have moved on. A Master still competing monthly is the better signal for hire-readiness.
 
-> **Specialisation matters.** Grandmasters tend to specialise. Someone with 10 medals in tabular competitions won't necessarily be strong at computer vision. Match the competition type to the role you're sourcing. A vision role wants someone who's placed in image classification or segmentation competitions — not LightGBM tabular ones.
+<aside class="callout">
+<span class="callout-label">Specialisation matters</span>
+Grandmasters tend to specialise. Someone with 10 medals in tabular competitions won't necessarily be strong at computer vision. Match the competition type to the role you're sourcing. A vision role wants someone who's placed in image classification or segmentation competitions — not LightGBM tabular ones.
+</aside>
 
 ### Competition quality varies
 
@@ -355,9 +370,18 @@ of work that moves for you.
 
 LinkedIn's own published benchmarks put **recruiting InMail averages at 18–25%**, and **SaaS/software InMail at around 4.77%** — tech candidates respond to InMail at the lowest rate of any vertical.
 
+<div class="stat-row">
+<div class="stat"><span class="stat-number">18–25%</span><span class="stat-label">Recruiting InMail avg</span></div>
+<div class="stat"><span class="stat-number">4.77%</span><span class="stat-label">SaaS / software avg</span></div>
+<div class="stat"><span class="stat-number">2–3×</span><span class="stat-label">Specific vs generic outreach</span></div>
+</div>
+
 In my own sourcing runs, **specificity is the variable that moves reply rates most**. A message naming a specific PR, model, or competition result outperforms generic flattery by roughly 2–3x. LinkedIn's own data also shows messages under 400 characters perform 22% better.
 
-> **Don't do this.** Don't copy their code or README text into your message. Don't pretend to have read something you haven't. Senior ML engineers spot hollow technical flattery in one sentence, and your reply rate for that candidate drops to zero — permanently. If you can't genuinely speak to their work, don't reach out yet.
+<aside class="callout callout-warn">
+<span class="callout-label">Don't do this</span>
+Don't copy their code or README text into your message. Don't pretend to have read something you haven't. Senior ML engineers spot hollow technical flattery in one sentence, and your reply rate for that candidate drops to zero — permanently. If you can't genuinely speak to their work, don't reach out yet.
+</aside>
 
 ---
 

@@ -1,12 +1,15 @@
 ---
 layout: base.njk
 ---
-<article>
-  <header class="article-header">
+<!-- Reading progress bar — scrolls as the reader progresses through the playbook -->
+<div class="reading-progress" aria-hidden="true"><div class="reading-progress-fill"></div></div>
+
+<article class="playbook-article">
+  <header class="article-header playbook-header">
     <div class="container-reading">
       <a href="/playbooks/" class="back-link">Back to playbooks</a>
       <div class="article-meta">
-        <span class="article-issue">Playbook</span>
+        <span class="article-issue article-issue-playbook">{{ status or 'Playbook' }}</span>
         {% if readingTime %}<span class="article-pillar">{{ readingTime }} read</span>{% endif %}
         {% if updated %}<span class="article-date">Updated {{ updated | date('%b %Y') }}</span>{% endif %}
       </div>
@@ -16,7 +19,7 @@ layout: base.njk
   </header>
 
   <div class="container-reading">
-    <div class="prose">
+    <div class="prose prose-playbook">
       {{ content | safe }}
     </div>
 
@@ -29,3 +32,24 @@ layout: base.njk
     </div>
   </div>
 </article>
+
+<script>
+(function() {
+  const bar = document.querySelector('.reading-progress-fill');
+  if (!bar) return;
+  const article = document.querySelector('.playbook-article');
+  if (!article) return;
+
+  function update() {
+    const rect = article.getBoundingClientRect();
+    const total = article.offsetHeight - window.innerHeight;
+    const scrolled = Math.min(Math.max(-rect.top, 0), total);
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+})();
+</script>

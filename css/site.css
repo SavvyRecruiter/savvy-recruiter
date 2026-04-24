@@ -680,3 +680,397 @@ input:focus-visible {
 
 .back-link::before { content: '←'; }
 .back-link:hover { color: var(--gold); }
+
+/* ============================================================
+   PLAYBOOK EDITORIAL STYLING (Scope 2)
+   ============================================================
+   Everything below is scoped to .prose-playbook or its children,
+   so it ONLY affects playbook pages. Newsletters, about, and
+   homepage are unaffected.
+   ============================================================ */
+
+/* ─── Reading progress bar ─── */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 195, 0, .08);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.reading-progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(255, 195, 0, .4);
+  transition: width 120ms ease-out;
+}
+
+/* ─── Playbook-specific article header tweaks ─── */
+
+.playbook-header h1 {
+  font-size: clamp(38px, 6.5vw, 68px);
+  letter-spacing: -0.005em;
+}
+
+.article-issue-playbook {
+  background: rgba(0, 180, 216, .08);
+  border-color: rgba(0, 180, 216, .3);
+  color: var(--teal);
+}
+
+/* ─── Drop cap on opening paragraph ─── */
+/* Only the FIRST paragraph of the playbook prose gets the drop cap */
+
+.prose-playbook > p:first-of-type::first-letter {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 84px;
+  line-height: 0.85;
+  float: left;
+  color: var(--gold);
+  margin: 4px 12px 0 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.prose-playbook > p:first-of-type {
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+/* ─── Section dividers (H2 rendered as magazine chapter openers) ─── */
+/* Each H2 in a playbook becomes a big editorial section divider
+   with a large numeral. Numbers are generated via CSS counters
+   so they stay in sync even if sections are reordered. */
+
+.prose-playbook {
+  counter-reset: section-counter;
+}
+
+.prose-playbook h2 {
+  counter-increment: section-counter;
+  position: relative;
+  font-size: clamp(30px, 4vw, 44px);
+  margin-top: var(--s-8);
+  margin-bottom: var(--s-4);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--border-subtle);
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+/* Override the generic prose rule that draws a tiny gold bar before H2 */
+.prose-playbook h2::before {
+  content: counter(section-counter, decimal-leading-zero);
+  display: block;
+  position: static;
+  width: auto;
+  height: auto;
+  background: transparent;
+  margin: 0 0 var(--s-2) 0;
+  font-family: var(--f-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.prose-playbook h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin-top: var(--s-3);
+}
+
+/* First H2 gets no top border — it's the first break after the intro */
+.prose-playbook h2:first-of-type {
+  border-top: none;
+  padding-top: var(--s-5);
+}
+
+/* ─── H3 — sub-section styling with gold accent ─── */
+
+.prose-playbook h3 {
+  font-size: 22px;
+  margin-top: var(--s-5);
+  margin-bottom: var(--s-3);
+  padding-left: var(--s-3);
+  border-left: 2px solid var(--gold);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Pull quotes — blockquotes become dramatic editorial callouts ─── */
+
+.prose-playbook blockquote {
+  position: relative;
+  border-left: 3px solid var(--gold);
+  padding: var(--s-4) var(--s-5);
+  margin: var(--s-6) 0;
+  background: linear-gradient(90deg, rgba(255, 195, 0, .05) 0%, transparent 100%);
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.25;
+  color: var(--parch);
+  font-style: normal;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.prose-playbook blockquote::before {
+  content: '❝';
+  position: absolute;
+  top: -4px;
+  left: var(--s-3);
+  font-size: 32px;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  opacity: 0.4;
+  display: none; /* keep quote-mark off by default — brand is restrained */
+}
+
+.prose-playbook blockquote p {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
+
+.prose-playbook blockquote strong {
+  background: none;
+  color: var(--gold);
+}
+
+/* ─── Stat callout — custom HTML inline in markdown ─── */
+/* Usage in markdown: <div class="stat"><span class="stat-number">3:1</span><span class="stat-label">demand-supply gap</span></div> */
+
+.prose-playbook .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--s-4) var(--s-5);
+  margin: var(--s-5) 0;
+  background: var(--navy);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--r-card);
+}
+
+.prose-playbook .stat-number {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(48px, 7vw, 72px);
+  line-height: 0.95;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+}
+
+.prose-playbook .stat-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-top: var(--s-2);
+}
+
+/* Stat row — multiple stats side by side */
+.prose-playbook .stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--s-3);
+  margin: var(--s-5) 0;
+}
+
+.prose-playbook .stat-row .stat {
+  margin: 0;
+}
+
+/* ─── Info callout — for "worth flagging" and "pro tip" boxes ─── */
+/* Rendered as styled blockquote when the first line is **Label.** */
+/* For more control, use: <aside class="callout callout-warn">...</aside> */
+
+.prose-playbook .callout,
+.prose-playbook aside.callout {
+  padding: var(--s-4) var(--s-5);
+  margin: var(--s-5) 0;
+  background: var(--navy2);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--teal);
+  border-radius: var(--r-card);
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--parch);
+  font-family: var(--f-body);
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.prose-playbook .callout-warn {
+  border-left-color: var(--gold);
+  background: linear-gradient(90deg, rgba(255, 195, 0, .04) 0%, var(--navy2) 100%);
+}
+
+.prose-playbook .callout-label {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--s-2);
+}
+
+/* ─── Code blocks — upgraded terminal feel ─── */
+
+.prose-playbook pre {
+  position: relative;
+  background: var(--void);
+  border: 1px solid var(--border-subtle);
+  border-left: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  padding: var(--s-4) var(--s-5);
+  margin: var(--s-4) 0;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.prose-playbook pre::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow:
+    -12px 0 0 0 var(--slate2),
+    -24px 0 0 0 var(--slate2);
+  opacity: 0.35;
+}
+
+.prose-playbook pre code {
+  color: var(--parch);
+  font-family: var(--f-mono);
+  font-weight: 400;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* ─── Inline code — slightly more prominent ─── */
+
+.prose-playbook code {
+  font-size: 13.5px;
+  padding: 2px 7px;
+  background: var(--navy2);
+  color: var(--gold);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+}
+
+.prose-playbook pre code {
+  font-size: inherit;
+}
+
+/* ─── Tables — more editorial ─── */
+
+.prose-playbook table {
+  font-size: 14.5px;
+  margin: var(--s-5) 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+
+.prose-playbook th {
+  background: var(--navy);
+  padding: var(--s-3) var(--s-4);
+  color: var(--gold);
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-med);
+}
+
+.prose-playbook td {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+.prose-playbook tr:last-child td {
+  border-bottom: none;
+}
+
+.prose-playbook tr:hover td {
+  background: rgba(255, 195, 0, .02);
+}
+
+/* ─── HR — section dividers ─── */
+
+.prose-playbook hr {
+  border: none;
+  margin: var(--s-7) auto;
+  max-width: 80px;
+  height: 1px;
+  background: var(--border-med);
+  position: relative;
+}
+
+.prose-playbook hr::before {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: var(--gold);
+  background: var(--void);
+  padding: 0 8px;
+}
+
+/* ─── Mobile adjustments for playbook styles ─── */
+
+@media (max-width: 640px) {
+  .prose-playbook > p:first-of-type::first-letter {
+    font-size: 64px;
+    margin: 2px 10px 0 0;
+  }
+
+  .prose-playbook h2 {
+    margin-top: var(--s-6);
+  }
+
+  .prose-playbook blockquote {
+    padding: var(--s-3) var(--s-4);
+    font-size: 18px;
+  }
+
+  .prose-playbook .stat-number {
+    font-size: 42px;
+  }
+
+  .prose-playbook pre {
+    padding: var(--s-3);
+    font-size: 12px;
+  }
+}
