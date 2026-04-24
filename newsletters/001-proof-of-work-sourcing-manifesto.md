@@ -6,7 +6,7 @@ pillar: Methodology
 dek: Why I find ML engineers through their code and their papers instead of their CVs. And why, after testing eight AI sourcing tools across 28 client briefs, direct technical engagement still wins on senior hires.
 ---
 
-I've spent the last eighteen months running a test lab at First2 Group.
+I've spent the last eighteen months running a test lab.
 
 The question I wanted answered was simple. **Across the 2026 AI recruiting stack — hireEZ, Juicebox, SeekOut, Claude, ChatGPT, Gemini, Perplexity, LinkedIn Hiring Assistant — which tool actually places senior ML engineers?**
 
@@ -75,4 +75,4 @@ See you next Wednesday.
 
 ---
 
-**Brendan Williams** · AI Sourcing Specialist, First2 Group · Manchester
+**Brendan Williams** · AI Sourcing Specialist · Manchester

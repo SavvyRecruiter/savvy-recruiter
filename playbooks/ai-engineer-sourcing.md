@@ -395,7 +395,7 @@ Start with one query this week. Measure the signal quality against your LinkedIn
 
 ---
 
-**Brendan Williams** · AI Sourcing Specialist, First2 Group · Manchester
+**Brendan Williams** · AI Sourcing Specialist · Manchester
 [linkedin.com/in/sourcing-strategist](https://www.linkedin.com/in/sourcing-strategist/)
 
 *Savvy Recruiter — Field Playbook Vol. 01. April 2026.*
