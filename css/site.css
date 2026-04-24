@@ -168,28 +168,44 @@ section { padding: var(--s-8) 0; position: relative; }
 .brand {
   display: flex;
   align-items: center;
-  gap: var(--s-2);
+  gap: 10px;
   text-decoration: none;
   color: var(--parch);
 }
 
 .brand-mark {
-  width: 26px;
-  height: 26px;
-  background: var(--gold);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: block;
+  transition: transform 300ms ease;
 }
 
-.brand-text {
+.brand:hover .brand-mark {
+  transform: rotate(45deg);
+}
+
+.brand-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+}
+
+.brand-savvy {
   color: var(--parch);
 }
 
-.brand-text span { color: var(--gold); }
+.brand-recruiter {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
 
 .nav-links {
   display: flex;
@@ -229,7 +245,8 @@ section { padding: var(--s-8) 0; position: relative; }
 @media (max-width: 640px) {
   .nav-links { gap: var(--s-3); }
   .nav-links a { font-size: 10px; letter-spacing: 0.12em; }
-  .brand-text { font-size: 15px; }
+  .brand-wordmark { font-size: 14px; gap: 4px; }
+  .brand-mark { width: 24px; height: 24px; }
 }
 
 /* ============================================================
