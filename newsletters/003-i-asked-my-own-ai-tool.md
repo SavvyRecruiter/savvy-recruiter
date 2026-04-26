@@ -30,7 +30,7 @@ Here's what's wrong with that.
 
 **"A minimum of 100 followers and 5 published papers."** Presented as a threshold that means something. arXiv doesn't have followers. The threshold is fabricated.
 
-**"Google, Microsoft, and Meta."** Name-dropped as if I've placed candidates at FAANG. I haven't.
+**"Google, Microsoft, and Meta."** Name-dropped as if I've placed candidates across multiple FAANG companies. I haven't. The only FAANG name I can defend in print is Amazon, where I have placed. Google, Microsoft and Meta are not on my CV.
 
 **"A list of 17 alternative platforms"** then later **"the next 17."** Both seventeens. Suspicious symmetry. The first seventeen doesn't exist as a real artifact.
 
