@@ -7,21 +7,35 @@ Proof of Work Sourcing for ML and robotics hiring.
 
 ---
 
+## Branches
+
+This repo uses two branches:
+
+- **`main`** — what Netlify deploys. Anything merged here is live.
+- **`drafts`** — staging. Posts sit here until Wednesday morning.
+
+You write drafts on the `drafts` branch. Every Wednesday at 10am London a GitHub Action merges `drafts` into `main`, which triggers Netlify to deploy. That's it.
+
+You can also publish manually any time — see "Publishing immediately" below.
+
+---
+
 ## Publishing a new newsletter (the workflow)
 
-Every Wednesday:
+Any day of the week:
 
 1. Go to your GitHub repo on github.com
-2. Click into the `newsletters/` folder
-3. Click **"Add file" → "Create new file"**
-4. Name it like: `002-title-of-issue.md` (number it, dash-separated slug)
-5. Paste this template at the top:
+2. **Switch to the `drafts` branch** using the branch dropdown (top-left of the file list)
+3. Click into the `newsletters/` folder
+4. Click **"Add file" → "Create new file"**
+5. Name it like: `005-title-of-issue.md` (number it, dash-separated slug)
+6. Paste this template at the top:
 
 ```markdown
 ---
 title: Your headline here
-issue: 2
-date: 2026-05-06
+issue: 5
+date: 2026-05-27
 pillar: Automation
 dek: One or two sentence summary shown in archive listings and social cards.
 ---
@@ -44,11 +58,51 @@ Lists work like this:
 Sign off with your name, same pattern as issue #1.
 ```
 
-6. Click **"Commit new file"** at the bottom
-7. Netlify auto-rebuilds. Site updates in ~60 seconds.
-8. Post the link on LinkedIn.
+7. At the bottom, **make sure "Commit directly to the `drafts` branch" is selected** (not main). Click "Commit new file".
+8. The post is now staged. It will go live automatically at 10am London on the next Wednesday.
 
 **Pillar values** (used on archive for tagging): `Methodology`, `Automation`, `Tools`, `Contrarian`, `Training`, `Hidden Platforms`, `Proof of Work`.
+
+### Previewing a draft before it ships
+
+If Netlify branch deploys are enabled (Netlify dashboard → Site settings → Build & deploy → Branches), every push to `drafts` builds a preview URL like `drafts--savvyrecruiternewsletter.netlify.app`. Use that to read the post in its rendered form before Wednesday.
+
+If branch deploys aren't on, you can still preview locally — see "Local preview" below.
+
+---
+
+## Publishing immediately (skipping the schedule)
+
+When you want a post live right now and don't want to wait for Wednesday:
+
+**Option A — via GitHub UI:**
+1. Go to the **Actions** tab in the repo
+2. Click "Scheduled publish" in the left sidebar
+3. Click "Run workflow" → "Run workflow" (default branch `main` is fine)
+4. The action merges `drafts` into `main` immediately and Netlify deploys
+
+**Option B — via terminal:**
+```bash
+git checkout main
+git pull
+git merge origin/drafts --no-ff -m "Manual publish"
+git push origin main
+```
+
+Either way, anything currently on `drafts` goes live.
+
+---
+
+## How the schedule works
+
+The workflow file lives at `.github/workflows/scheduled-publish.yml`. Two cron entries fire it:
+
+- `0 9 * * 3` — 09:00 UTC Wednesday (10:00 London during BST, March-October)
+- `0 10 * * 3` — 10:00 UTC Wednesday (10:00 London during GMT, October-March)
+
+The second run is a no-op if the first already merged, so we don't have to remember to swap the cron at clock changes. If `drafts` has no new commits, the action does nothing and exits cleanly.
+
+GitHub cron is best-effort and can drift 5-15 minutes under peak load. Don't promise readers exactly 10:00 — "Wednesday morning" is the honest framing.
 
 ---
 

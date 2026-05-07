@@ -1,0 +1,64 @@
+name: Scheduled publish
+
+# Merges the `drafts` branch into `main` every Wednesday morning.
+# Netlify auto-deploys main, so the merge is what makes posts go live.
+#
+# Cron is in UTC. London is BST (UTC+1) March-October, GMT (UTC+0) October-March.
+# 09:00 UTC = 10:00 London during BST, 09:00 London during GMT.
+# We run twice — once at 09:00 UTC, once at 10:00 UTC — and the second is a no-op
+# if the first already merged. This keeps publication at "10am London" year-round
+# without manually swapping the cron at clock changes.
+#
+# GitHub cron is best-effort and can drift 5-15 minutes during peak load.
+# Don't promise readers exactly 10:00.
+
+on:
+  schedule:
+    - cron: '0 9 * * 3'   # 10:00 London during BST
+    - cron: '0 10 * * 3'  # 10:00 London during GMT
+  workflow_dispatch:       # manual trigger from the Actions tab
+
+# Only one publish run at a time; cancel the older one if a second fires.
+concurrency:
+  group: scheduled-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main with full history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "Scheduled Publisher"
+          git config user.email "actions@github.com"
+
+      - name: Fetch drafts branch
+        run: git fetch origin drafts
+
+      - name: Check whether drafts has anything new
+        id: check
+        run: |
+          # Count commits on drafts that aren't on main
+          NEW_COMMITS=$(git rev-list --count main..origin/drafts)
+          echo "new_commits=$NEW_COMMITS" >> "$GITHUB_OUTPUT"
+          echo "Found $NEW_COMMITS new commit(s) on drafts."
+
+      - name: Merge drafts into main
+        if: steps.check.outputs.new_commits != '0'
+        run: |
+          git merge origin/drafts --no-ff -m "Scheduled publish $(date -u +%Y-%m-%d)"
+          git push origin main
+          echo "Published. Netlify will rebuild automatically."
+
+      - name: Nothing to publish
+        if: steps.check.outputs.new_commits == '0'
+        run: echo "No new commits on drafts. Nothing to publish."
