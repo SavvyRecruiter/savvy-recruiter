@@ -22,24 +22,60 @@ eleventyExcludeFromCollections: true
   <div class="container-narrow">
     {% set newsletters = collections.newsletter | reverse %}
     {% if newsletters.length > 0 %}
+
+      {# Pillar → colour map. Add new pillars here. #}
+      {% set pillarColors = {
+        "Methodology": "var(--gold)",
+        "Automation": "var(--rose)",
+        "Research": "var(--green)",
+        "Build Log": "var(--teal)",
+        "Hidden Platforms": "var(--purple)",
+        "Tools": "var(--teal)",
+        "Contrarian": "var(--rose)",
+        "Training": "var(--green)",
+        "Proof of Work": "var(--gold)"
+      } %}
+
       {% for post in newsletters %}
-      <a href="{{ post.url }}" class="issue-row">
-        <div class="issue-left">
-          {% if post.data.issue %}<span class="issue-num">#{{ post.data.issue }}</span>{% endif %}
-        </div>
-        <div class="issue-mid">
-          <div class="issue-meta">
-            {% if post.data.pillar %}<span>{{ post.data.pillar }}</span>{% endif %}
-            <span class="issue-date">{{ post.data.date | date('%d %b %Y') }}</span>
+        {% set pillarColor = pillarColors[post.data.pillar] or "var(--gold)" %}
+
+        {% if loop.first %}
+        {# ============ FEATURED ISSUE (latest) ============ #}
+        <a href="{{ post.url }}" class="featured-issue" style="--pillar-color: {{ pillarColor }};">
+          <div class="featured-eyebrow">Latest issue · {{ post.data.date | date('%A %d %B') }}</div>
+          <div class="featured-meta">
+            {% if post.data.pillar %}<span class="pillar-tag">{{ post.data.pillar }}</span>{% endif %}
+            <span class="issue-date-prom">{{ post.data.date | date('%d %b %Y') }}</span>
+            {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ '%02d' | format(post.data.issue) }}</span>{% endif %}
           </div>
-          <h2 class="issue-title">{{ post.data.title }}</h2>
-          {% if post.data.dek %}<p class="issue-dek">{{ post.data.dek }}</p>{% endif %}
-        </div>
-        <div class="issue-right">
+          <h2 class="featured-title">{{ post.data.title }}</h2>
+          {% if post.data.dek %}<p class="featured-dek">{{ post.data.dek }}</p>{% endif %}
+          <div class="featured-cta">
+            Read the full issue <span class="arrow">→</span>
+          </div>
+        </a>
+
+        {% if newsletters.length > 1 %}
+        <div class="archive-divider">The archive</div>
+        {% endif %}
+
+        {% else %}
+        {# ============ ARCHIVE ROW ============ #}
+        <a href="{{ post.url }}" class="issue-row" style="--pillar-color: {{ pillarColor }};">
+          <div>
+            <div class="issue-meta">
+              {% if post.data.pillar %}<span class="pillar-tag">{{ post.data.pillar }}</span>{% endif %}
+              <span class="issue-date-prom">{{ post.data.date | date('%d %b %Y') }}</span>
+              {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ '%02d' | format(post.data.issue) }}</span>{% endif %}
+            </div>
+            <h2 class="issue-title">{{ post.data.title }}</h2>
+            {% if post.data.dek %}<p class="issue-dek">{{ post.data.dek }}</p>{% endif %}
+          </div>
           <span class="issue-arrow">→</span>
-        </div>
-      </a>
+        </a>
+        {% endif %}
       {% endfor %}
+
     {% else %}
       <div class="empty-state">
         <div class="empty-eyebrow">Coming soon</div>
@@ -73,67 +109,186 @@ eleventyExcludeFromCollections: true
   max-width: 580px;
 }
 
-.archive-list { padding: var(--s-5) 0 var(--s-7); }
+.archive-list { padding: var(--s-6) 0 var(--s-7); }
 
-.issue-row {
-  display: grid;
-  grid-template-columns: 80px 1fr 40px;
-  gap: var(--s-4);
-  padding: var(--s-4) 0;
-  border-bottom: 1px solid var(--border-subtle);
+/* ============ FEATURED ISSUE (latest) ============ */
+.featured-issue {
+  display: block;
   text-decoration: none;
   color: inherit;
-  transition: background 180ms ease;
-  align-items: start;
+  background: var(--navy);
+  border: 1px solid var(--border-med);
+  border-left: 3px solid var(--pillar-color, var(--gold));
+  border-radius: var(--r-card);
+  padding: var(--s-5) var(--s-5) var(--s-4);
+  margin-bottom: var(--s-6);
+  position: relative;
+  transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
 }
 
-.issue-row:hover {
-  background: rgba(255, 195, 0, .025);
+.featured-issue:hover {
+  background: var(--navy2);
+  border-left-color: var(--pillar-color, var(--gold));
+  transform: translateY(-1px);
 }
 
-.issue-row:hover .issue-arrow {
+.featured-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
   color: var(--gold);
-  transform: translateX(4px);
+  margin-bottom: var(--s-3);
 }
 
-.issue-row:hover .issue-title {
-  color: var(--gold);
+.featured-eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(255, 195, 0, .6);
+  animation: pulse-dot 2.5s ease-in-out infinite;
 }
 
-.issue-num {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 28px;
-  color: var(--gold4);
-  line-height: 1;
-  transition: color 180ms ease;
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
-.issue-row:hover .issue-num { color: var(--gold); }
-
-.issue-meta {
+.featured-meta {
   display: flex;
   gap: var(--s-3);
   align-items: center;
+  margin-bottom: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.pillar-tag {
   font-family: var(--f-mono);
   font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--slate);
-  margin-bottom: var(--s-2);
+  color: var(--pillar-color, var(--slate));
+  padding: 4px 10px;
+  border: 1px solid var(--pillar-color, var(--slate));
+  border-radius: var(--r-btn);
+  background: color-mix(in srgb, var(--pillar-color, var(--slate)) 8%, transparent);
 }
 
-.issue-date::before {
-  content: '·';
-  margin-right: var(--s-3);
+.issue-date-prom {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--parch);
+  font-weight: 400;
+}
+
+.issue-num-quiet {
+  font-family: var(--f-mono);
+  font-size: 11px;
   color: var(--slate);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.featured-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 36px);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--parch);
+  line-height: 1.1;
+  margin-bottom: var(--s-3);
+  transition: color 200ms ease;
+}
+
+.featured-issue:hover .featured-title { color: var(--gold); }
+
+.featured-dek {
+  font-size: 16px;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: var(--s-4);
+}
+
+.featured-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 500;
+}
+
+.featured-cta .arrow { transition: transform 200ms ease; }
+.featured-issue:hover .featured-cta .arrow { transform: translateX(4px); }
+
+/* ============ ARCHIVE ROWS ============ */
+.archive-divider {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--slate);
+  margin-bottom: var(--s-4);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.archive-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.issue-row {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-4) var(--s-4) calc(var(--s-4) - 1px);
+  border-left: 1px solid var(--pillar-color, var(--border-med));
+  border-bottom: 1px solid var(--border-subtle);
+  text-decoration: none;
+  color: inherit;
+  transition: border-left-width 180ms ease, background 180ms ease, padding-left 180ms ease;
+  align-items: start;
+}
+
+.issue-row:hover {
+  background: rgba(255, 195, 0, .025);
+  border-left: 3px solid var(--pillar-color, var(--gold));
+  padding-left: calc(var(--s-4) - 3px);
+}
+
+.issue-row:hover .issue-title { color: var(--gold); }
+.issue-row:hover .issue-arrow {
+  color: var(--gold);
+  transform: translateX(4px);
+}
+
+.issue-meta {
+  display: flex;
+  gap: var(--s-3);
+  align-items: center;
+  margin-bottom: var(--s-2);
+  flex-wrap: wrap;
 }
 
 .issue-title {
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(20px, 2.2vw, 26px);
+  font-size: clamp(20px, 2.2vw, 24px);
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: var(--parch);
@@ -143,9 +298,9 @@ eleventyExcludeFromCollections: true
 }
 
 .issue-dek {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--slate);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .issue-arrow {
@@ -153,8 +308,7 @@ eleventyExcludeFromCollections: true
   font-size: 18px;
   color: var(--slate);
   transition: color 180ms ease, transform 180ms ease;
-  display: block;
-  padding-top: 4px;
+  padding-top: 6px;
 }
 
 .empty-state {
@@ -190,12 +344,17 @@ eleventyExcludeFromCollections: true
 }
 
 @media (max-width: 600px) {
+  .featured-issue { padding: var(--s-4); }
+  .featured-title { font-size: 24px; }
   .issue-row {
-    grid-template-columns: 60px 1fr 24px;
+    grid-template-columns: 1fr 20px;
     gap: var(--s-3);
+    padding: var(--s-3) var(--s-3) var(--s-3) calc(var(--s-3) - 1px);
   }
-  .issue-num { font-size: 22px; }
+  .issue-row:hover {
+    padding-left: calc(var(--s-3) - 3px);
+  }
   .issue-title { font-size: 18px; }
-  .issue-meta { font-size: 9px; }
+  .issue-meta { font-size: 9px; gap: var(--s-2); }
 }
 </style>
