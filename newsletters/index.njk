@@ -42,11 +42,11 @@ eleventyExcludeFromCollections: true
         {% if loop.first %}
         {# ============ FEATURED ISSUE (latest) ============ #}
         <a href="{{ post.url }}" class="featured-issue" style="--pillar-color: {{ pillarColor }};">
-          <div class="featured-eyebrow">Latest issue · {{ post.data.date | date('%A %d %B') }}</div>
+          <div class="featured-eyebrow">Latest issue · {{ post.data.date | date('%d %b') }}</div>
           <div class="featured-meta">
             {% if post.data.pillar %}<span class="pillar-tag">{{ post.data.pillar }}</span>{% endif %}
             <span class="issue-date-prom">{{ post.data.date | date('%d %b %Y') }}</span>
-            {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ '%02d' | format(post.data.issue) }}</span>{% endif %}
+            {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ post.data.issue }}</span>{% endif %}
           </div>
           <h2 class="featured-title">{{ post.data.title }}</h2>
           {% if post.data.dek %}<p class="featured-dek">{{ post.data.dek }}</p>{% endif %}
@@ -66,7 +66,7 @@ eleventyExcludeFromCollections: true
             <div class="issue-meta">
               {% if post.data.pillar %}<span class="pillar-tag">{{ post.data.pillar }}</span>{% endif %}
               <span class="issue-date-prom">{{ post.data.date | date('%d %b %Y') }}</span>
-              {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ '%02d' | format(post.data.issue) }}</span>{% endif %}
+              {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ post.data.issue }}</span>{% endif %}
             </div>
             <h2 class="issue-title">{{ post.data.title }}</h2>
             {% if post.data.dek %}<p class="issue-dek">{{ post.data.dek }}</p>{% endif %}
