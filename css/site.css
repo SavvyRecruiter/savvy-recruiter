@@ -1463,3 +1463,37 @@ input:focus-visible {
     padding: var(--s-5);
   }
 }
+
+/* Timeline sub-card (e.g. Ellison Institute contract under First2) */
+.timeline-sub {
+  margin-top: var(--s-4);
+  padding: var(--s-4);
+  background: var(--navy2);
+  border-left: 2px solid var(--purple);
+  border-radius: 0 var(--r-card) var(--r-card) 0;
+}
+
+.timeline-sub-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--purple);
+  margin-bottom: var(--s-2);
+}
+
+.timeline-sub-role {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--parch);
+  margin-bottom: var(--s-2);
+  line-height: 1.15;
+}
+
+.timeline-sub .timeline-stat {
+  color: var(--purple);
+}
