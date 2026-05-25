@@ -1,7 +1,7 @@
 ---
 title: The Synonym Map — how to stop AI screeners filtering out your best candidates
 date: 2026-05-07
-status: Live · Vol. 01
+status: Live · Vol. 02
 readingTime: 12 min
 dek: A working keyword map for AI screeners hiring across ML, robotics, and quantum. 60 skill clusters with every synonym, abbreviation, and academic-versus-industry variant. Refresh quarterly — terminology drifts faster than the screener's training data.
 ---
