@@ -1,53 +1,45 @@
 ---
 layout: base.njk
 ---
-<!-- Reading progress bar — scrolls as the reader progresses through the playbook -->
 <div class="reading-progress" aria-hidden="true"><div class="reading-progress-fill"></div></div>
 
-<article class="playbook-article">
-  <header class="article-header playbook-header">
-    <div class="container-reading">
-      <a href="/playbooks/" class="back-link">Back to playbooks</a>
+<article class="article" id="pb-article">
+  <div class="wrap">
+    <header class="article-header">
+      <a href="/playbooks/" class="back-link">← Back to playbooks</a>
       <div class="article-meta">
-        <span class="article-issue article-issue-playbook">{{ status or 'Playbook' }}</span>
-        {% if readingTime %}<span class="article-pillar">{{ readingTime }} read</span>{% endif %}
+        <span class="article-pill">{{ status or 'Playbook' }}</span>
+        {% if readingTime %}<span class="article-date">{{ readingTime }} read</span>{% endif %}
         {% if updated %}<span class="article-date">Updated {{ updated | date('%b %Y') }}</span>{% endif %}
       </div>
       <h1>{{ title }}</h1>
-      {% if dek %}<p class="dek">{{ dek }}</p>{% endif %}
-    </div>
-  </header>
+      {% if dek %}<p class="article-dek">{{ dek }}</p>{% endif %}
+    </header>
 
-  <div class="container-reading">
-    <div class="prose prose-playbook">
+    <div class="prose">
       {{ content | safe }}
     </div>
 
     <div class="article-footer">
-      <div class="eyebrow">Go deeper</div>
-      <p style="font-size: 15px; color: var(--slate); line-height: 1.6;">
-        Browse the full <a href="/playbooks/" style="color: var(--gold); border-bottom: 1px solid rgba(255,195,0,.3);">playbook library</a>,
-        or subscribe to the <a href="/newsletters/" style="color: var(--gold); border-bottom: 1px solid rgba(255,195,0,.3);">Wednesday briefing</a> for weekly research.
-      </p>
+      <div class="eyebrow">§ go deeper</div>
+      <p>Browse the full <a href="/playbooks/">playbook library</a>, or subscribe to the <a href="/newsletters/">Wednesday briefing</a> for weekly research.</p>
     </div>
   </div>
 </article>
 
 <script>
 (function() {
-  const bar = document.querySelector('.reading-progress-fill');
+  var bar = document.querySelector('.reading-progress-fill');
   if (!bar) return;
-  const article = document.querySelector('.playbook-article');
+  var article = document.getElementById('pb-article');
   if (!article) return;
-
   function update() {
-    const rect = article.getBoundingClientRect();
-    const total = article.offsetHeight - window.innerHeight;
-    const scrolled = Math.min(Math.max(-rect.top, 0), total);
-    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    var rect = article.getBoundingClientRect();
+    var total = article.offsetHeight - window.innerHeight;
+    var scrolled = Math.min(Math.max(-rect.top, 0), total);
+    var pct = total > 0 ? (scrolled / total) * 100 : 0;
     bar.style.width = pct + '%';
   }
-
   update();
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update, { passive: true });

@@ -4,6 +4,8 @@ module.exports = function(eleventyConfig) {
   // Copy static assets straight through
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("images");
+  eleventyConfig.addPassthroughCopy("playbooks/assets");
+  eleventyConfig.ignores.add("playbooks/assets/**");
 
   // Collection: all newsletters in /newsletters/ (excluding index)
   eleventyConfig.addCollection("newsletter", function(collectionApi) {

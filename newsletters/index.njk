@@ -1,360 +1,80 @@
 ---
 layout: base.njk
-title: Newsletter Archive
-description: Every issue of the Wednesday Briefing — field-tested AI sourcing techniques, tool reviews, and automation recipes from the lab.
+title: The Wednesday Briefing
+description: Every issue of The Wednesday Briefing — field-tested AI sourcing techniques, honest tool reviews, and automation recipes for ML and robotics recruiting.
 permalink: /newsletters/
 eleventyExcludeFromCollections: true
 ---
 
-<section class="archive-hero">
-  <div class="container-narrow">
-    <div class="eyebrow">Newsletter</div>
-    <h1 class="archive-title">The Wednesday Briefing</h1>
-    <p class="archive-dek">
-      One issue every Wednesday at 10am London. Field-tested AI sourcing techniques,
-      honest tool reviews from the 2026 lab, and the week's best automation recipe.
-      Every issue free, forever.
-    </p>
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">§ the newsletter</div>
+    <h1>The Wednesday<br><span class="si">Briefing.</span></h1>
+    <p class="lede">One email, every Wednesday. Field-tested AI sourcing techniques, honest tool reviews from the 2026 lab, and the week's best automation recipe. Free, forever.</p>
   </div>
-</section>
+</header>
 
-<section class="archive-list">
-  <div class="container-narrow">
+<section class="page-body">
+  <div class="wrap">
     {% set newsletters = collections.newsletter | reverse %}
+
+    {# Pillar → colour map. Teal is default; others code by category. #}
+    {% set pillarColors = {
+      "Methodology": "var(--teal)",
+      "Automation": "var(--ember)",
+      "Research": "var(--teal)",
+      "Build Log": "var(--teal)",
+      "Hidden Platforms": "var(--p-hidden)",
+      "Tool Reviews": "var(--teal)",
+      "Contrarian": "var(--ember)"
+    } %}
+
     {% if newsletters.length > 0 %}
 
-      {# Pillar → colour map. Add new pillars here. #}
-      {% set pillarColors = {
-        "Methodology": "var(--gold)",
-        "Automation": "var(--rose)",
-        "Research": "var(--green)",
-        "Build Log": "var(--teal)",
-        "Hidden Platforms": "var(--purple)",
-        "Tools": "var(--teal)",
-        "Contrarian": "var(--rose)",
-        "Training": "var(--green)",
-        "Proof of Work": "var(--gold)"
-      } %}
-
-      {% for post in newsletters %}
-        {% set pillarColor = pillarColors[post.data.pillar] or "var(--gold)" %}
-
-        {% if loop.first %}
-        {# ============ FEATURED ISSUE (latest) ============ #}
-        <a href="{{ post.url }}" class="featured-issue" style="--pillar-color: {{ pillarColor }};">
-          <div class="featured-eyebrow">Latest issue · {{ post.data.date | date('%d %b') }}</div>
-          <div class="featured-meta">
-            {% if post.data.pillar %}<span class="pillar-tag">{{ post.data.pillar }}</span>{% endif %}
-            <span class="issue-date-prom">{{ post.data.date | date('%d %b %Y') }}</span>
-            {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ post.data.issue }}</span>{% endif %}
-          </div>
-          <h2 class="featured-title">{{ post.data.title }}</h2>
-          {% if post.data.dek %}<p class="featured-dek">{{ post.data.dek }}</p>{% endif %}
-          <div class="featured-cta">
-            Read the full issue <span class="arrow">→</span>
-          </div>
-        </a>
-
-        {% if newsletters.length > 1 %}
-        <div class="archive-divider">The archive</div>
-        {% endif %}
-
-        {% else %}
-        {# ============ ARCHIVE ROW ============ #}
-        <a href="{{ post.url }}" class="issue-row" style="--pillar-color: {{ pillarColor }};">
-          <div>
-            <div class="issue-meta">
-              {% if post.data.pillar %}<span class="pillar-tag">{{ post.data.pillar }}</span>{% endif %}
-              <span class="issue-date-prom">{{ post.data.date | date('%d %b %Y') }}</span>
-              {% if post.data.issue %}<span class="issue-num-quiet">Issue {{ post.data.issue }}</span>{% endif %}
-            </div>
-            <h2 class="issue-title">{{ post.data.title }}</h2>
-            {% if post.data.dek %}<p class="issue-dek">{{ post.data.dek }}</p>{% endif %}
-          </div>
-          <span class="issue-arrow">→</span>
-        </a>
-        {% endif %}
+      {# Featured: latest issue #}
+      {% for post in newsletters | limit(1) %}
+      {% set pillarColor = pillarColors[post.data.pillar] or "var(--teal)" %}
+      <a href="{{ post.url }}" class="featured" style="--pillar-color: {{ pillarColor }};">
+        <div class="featured-eyebrow">
+          <span class="pip"></span>
+          <span>Latest issue{% if post.data.issue %} · no. {{ post.data.issue }}{% endif %}</span>
+        </div>
+        <div class="issue-meta">
+          {% if post.data.pillar %}<span class="pill" style="--pillar-color: {{ pillarColor }};">{{ post.data.pillar }}</span>{% endif %}
+          <span class="date">{{ post.data.date | date('%d %b %Y') }}</span>
+        </div>
+        <h2 class="featured-title">{{ post.data.title }}</h2>
+        {% if post.data.dek %}<p class="featured-dek">{{ post.data.dek }}</p>{% endif %}
+        <span class="featured-cta">Read the issue →</span>
+      </a>
       {% endfor %}
 
-    {% else %}
-      <div class="empty-state">
-        <div class="empty-eyebrow">Coming soon</div>
-        <p>The first issue publishes Wednesday. Check back then, or follow <a href="https://www.linkedin.com/in/sourcing-strategist/" target="_blank" rel="noopener">Brendan on LinkedIn</a> for the announcement.</p>
+      {# The archive #}
+      {% if newsletters.length > 1 %}
+      <div class="eyebrow" style="margin: 56px 0 8px;">§ the archive</div>
+      <div class="issues">
+        {% for post in newsletters %}
+          {% if not loop.first %}
+          {% set pillarColor = pillarColors[post.data.pillar] or "var(--teal)" %}
+          <a href="{{ post.url }}" class="issue" style="--pillar-color: {{ pillarColor }};">
+            <span class="idx">{% if post.data.issue %}{{ post.data.issue }}{% else %}—{% endif %}</span>
+            <div>
+              <div class="issue-meta">
+                {% if post.data.pillar %}<span class="pill" style="--pillar-color: {{ pillarColor }};">{{ post.data.pillar }}</span>{% endif %}
+                <span class="date">{{ post.data.date | date('%d %b %Y') }}</span>
+              </div>
+              <div class="issue-title">{{ post.data.title }}</div>
+              {% if post.data.dek %}<p class="issue-dek">{{ post.data.dek }}</p>{% endif %}
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          {% endif %}
+        {% endfor %}
       </div>
+      {% endif %}
+
+    {% else %}
+      <p style="color: var(--t2); font-size: 18px;">The first issue publishes Wednesday. Check back then, or follow <a href="https://www.linkedin.com/in/sourcing-strategist/" target="_blank" rel="noopener" style="color: var(--teal);">Brendan on LinkedIn</a> for the announcement.</p>
     {% endif %}
   </div>
 </section>
-
-<style>
-.archive-hero {
-  padding: var(--s-8) 0 var(--s-5);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.archive-title {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: clamp(40px, 6vw, 64px);
-  line-height: 0.98;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  color: var(--parch);
-  margin-bottom: var(--s-3);
-}
-
-.archive-dek {
-  font-size: 18px;
-  line-height: 1.6;
-  color: var(--slate);
-  max-width: 580px;
-}
-
-.archive-list { padding: var(--s-6) 0 var(--s-7); }
-
-/* ============ FEATURED ISSUE (latest) ============ */
-.featured-issue {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  background: var(--navy);
-  border: 1px solid var(--border-med);
-  border-left: 3px solid var(--pillar-color, var(--gold));
-  border-radius: var(--r-card);
-  padding: var(--s-5) var(--s-5) var(--s-4);
-  margin-bottom: var(--s-6);
-  position: relative;
-  transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
-}
-
-.featured-issue:hover {
-  background: var(--navy2);
-  border-left-color: var(--pillar-color, var(--gold));
-  transform: translateY(-1px);
-}
-
-.featured-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--s-3);
-  font-family: var(--f-mono);
-  font-size: 10px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  margin-bottom: var(--s-3);
-}
-
-.featured-eyebrow::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 12px rgba(255, 195, 0, .6);
-  animation: pulse-dot 2.5s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.featured-meta {
-  display: flex;
-  gap: var(--s-3);
-  align-items: center;
-  margin-bottom: var(--s-3);
-  flex-wrap: wrap;
-}
-
-.pillar-tag {
-  font-family: var(--f-mono);
-  font-size: 10px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--pillar-color, var(--slate));
-  padding: 4px 10px;
-  border: 1px solid var(--pillar-color, var(--slate));
-  border-radius: var(--r-btn);
-  background: color-mix(in srgb, var(--pillar-color, var(--slate)) 8%, transparent);
-}
-
-.issue-date-prom {
-  font-family: var(--f-mono);
-  font-size: 13px;
-  color: var(--parch);
-  font-weight: 400;
-}
-
-.issue-num-quiet {
-  font-family: var(--f-mono);
-  font-size: 11px;
-  color: var(--slate);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.featured-title {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: clamp(28px, 3.4vw, 36px);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  color: var(--parch);
-  line-height: 1.1;
-  margin-bottom: var(--s-3);
-  transition: color 200ms ease;
-}
-
-.featured-issue:hover .featured-title { color: var(--gold); }
-
-.featured-dek {
-  font-size: 16px;
-  color: var(--slate);
-  line-height: 1.6;
-  margin-bottom: var(--s-4);
-}
-
-.featured-cta {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  font-family: var(--f-mono);
-  font-size: 12px;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-weight: 500;
-}
-
-.featured-cta .arrow { transition: transform 200ms ease; }
-.featured-issue:hover .featured-cta .arrow { transform: translateX(4px); }
-
-/* ============ ARCHIVE ROWS ============ */
-.archive-divider {
-  font-family: var(--f-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--slate);
-  margin-bottom: var(--s-4);
-  display: flex;
-  align-items: center;
-  gap: var(--s-3);
-}
-
-.archive-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-subtle);
-}
-
-.issue-row {
-  display: grid;
-  grid-template-columns: 1fr 24px;
-  gap: var(--s-4);
-  padding: var(--s-4) var(--s-4) var(--s-4) calc(var(--s-4) - 1px);
-  border-left: 1px solid var(--pillar-color, var(--border-med));
-  border-bottom: 1px solid var(--border-subtle);
-  text-decoration: none;
-  color: inherit;
-  transition: border-left-width 180ms ease, background 180ms ease, padding-left 180ms ease;
-  align-items: start;
-}
-
-.issue-row:hover {
-  background: rgba(255, 195, 0, .025);
-  border-left: 3px solid var(--pillar-color, var(--gold));
-  padding-left: calc(var(--s-4) - 3px);
-}
-
-.issue-row:hover .issue-title { color: var(--gold); }
-.issue-row:hover .issue-arrow {
-  color: var(--gold);
-  transform: translateX(4px);
-}
-
-.issue-meta {
-  display: flex;
-  gap: var(--s-3);
-  align-items: center;
-  margin-bottom: var(--s-2);
-  flex-wrap: wrap;
-}
-
-.issue-title {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: clamp(20px, 2.2vw, 24px);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  color: var(--parch);
-  margin-bottom: var(--s-2);
-  line-height: 1.15;
-  transition: color 180ms ease;
-}
-
-.issue-dek {
-  font-size: 14px;
-  color: var(--slate);
-  line-height: 1.6;
-}
-
-.issue-arrow {
-  font-family: var(--f-mono);
-  font-size: 18px;
-  color: var(--slate);
-  transition: color 180ms ease, transform 180ms ease;
-  padding-top: 6px;
-}
-
-.empty-state {
-  text-align: center;
-  padding: var(--s-7) var(--s-4);
-  background: var(--navy);
-  border: 1px dashed var(--border-med);
-  border-radius: var(--r-card);
-}
-
-.empty-eyebrow {
-  font-family: var(--f-mono);
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  margin-bottom: var(--s-3);
-}
-
-.empty-state p {
-  font-size: 16px;
-  color: var(--slate);
-  line-height: 1.6;
-  max-width: 440px;
-  margin: 0 auto;
-}
-
-.empty-state a {
-  color: var(--gold);
-  border-bottom: 1px solid rgba(255, 195, 0, .3);
-  text-decoration: none;
-}
-
-@media (max-width: 600px) {
-  .featured-issue { padding: var(--s-4); }
-  .featured-title { font-size: 24px; }
-  .issue-row {
-    grid-template-columns: 1fr 20px;
-    gap: var(--s-3);
-    padding: var(--s-3) var(--s-3) var(--s-3) calc(var(--s-3) - 1px);
-  }
-  .issue-row:hover {
-    padding-left: calc(var(--s-3) - 3px);
-  }
-  .issue-title { font-size: 18px; }
-  .issue-meta { font-size: 9px; gap: var(--s-2); }
-}
-</style>

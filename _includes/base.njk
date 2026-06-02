@@ -4,50 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ description or 'Proof of Work Sourcing for ML and robotics hiring. Weekly research, playbooks, and tool benchmarks from Brendan Williams.' }}">
-  <title>{{ title }} — Savvy Recruiter</title>
+  <title>{{ title }} — savvy/recruiter</title>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ title }} — Savvy Recruiter">
+  <meta property="og:title" content="{{ title }} — savvy/recruiter">
   <meta property="og:description" content="{{ description or 'Proof of Work Sourcing for ML and robotics hiring.' }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
-  <meta property="og:site_name" content="Savvy Recruiter">
+  <meta property="og:site_name" content="savvy/recruiter">
 
-  <!-- Fonts -->
+  <!-- Fonts: Geist · Geist Mono · Instrument Serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
   <!-- Shared stylesheet -->
   <link rel="stylesheet" href="/css/site.css">
 
-  <!-- Favicon — Signal Mark reticle (from brand kit v8) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2307111E'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23FFC300' stroke-width='1.8' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23FFC300'/%3E%3Cline x1='2' y1='32' x2='14' y2='32' stroke='%23FFC300' stroke-width='1.8'/%3E%3Cline x1='50' y1='32' x2='62' y2='32' stroke='%23FFC300' stroke-width='1.8'/%3E%3Cline x1='32' y1='2' x2='32' y2='14' stroke='%23FFC300' stroke-width='1.8'/%3E%3Cline x1='32' y1='50' x2='32' y2='62' stroke='%23FFC300' stroke-width='1.8'/%3E%3C/svg%3E">
+  <!-- Favicon — s/ slash mark on teal -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2319D5C5'/%3E%3Ctext x='32' y='46' font-family='Geist,sans-serif' font-size='44' font-weight='400' text-anchor='middle' fill='%230A0E0D'%3E/%3C/text%3E%3C/svg%3E">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="brand" aria-label="Savvy Recruiter — home">
-        <svg class="brand-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="16" cy="16" r="12.5" fill="none" stroke="#FFC300" stroke-width="0.9" opacity="0.22"/>
-          <circle cx="16" cy="16" r="7.5" fill="none" stroke="#FFC300" stroke-width="0.9" opacity="0.55"/>
-          <circle cx="16" cy="16" r="3" fill="none" stroke="#FFC300" stroke-width="1" opacity="0.9"/>
-          <circle cx="16" cy="16" r="1" fill="#FFC300"/>
-          <line x1="1" y1="16" x2="5.5" y2="16" stroke="#FFC300" stroke-width="1"/>
-          <line x1="26.5" y1="16" x2="31" y2="16" stroke="#FFC300" stroke-width="1"/>
-          <line x1="16" y1="1" x2="16" y2="5.5" stroke="#FFC300" stroke-width="1"/>
-          <line x1="16" y1="26.5" x2="16" y2="31" stroke="#FFC300" stroke-width="1"/>
-        </svg>
-        <span class="brand-wordmark">
-          <span class="brand-savvy">SAVVY</span><span class="brand-recruiter">RECRUITER</span>
-        </span>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand" aria-label="savvy/recruiter — home">
+        <span class="tile">/</span>
+        <span class="wm">savvy<span class="slash">/</span>recruiter</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="/newsletters/" {% if page.url.startsWith('/newsletters') %}class="active"{% endif %}>Newsletter</a></li>
-        <li><a href="/playbooks/" {% if page.url.startsWith('/playbooks') %}class="active"{% endif %}>Playbooks</a></li>
-        <li><a href="/about/" {% if page.url.startsWith('/about') %}class="active"{% endif %}>About</a></li>
-      </ul>
+      <div class="nav-links">
+        <a href="/newsletters/" {% if page.url.startsWith('/newsletters') %}aria-current="page"{% endif %}>Newsletter</a>
+        <a href="/playbooks/" {% if page.url.startsWith('/playbooks') %}aria-current="page"{% endif %}>Playbooks</a>
+        <a href="/about/" {% if page.url.startsWith('/about') %}aria-current="page"{% endif %}>About</a>
+        <a href="/newsletters/" class="cta">Subscribe →</a>
+      </div>
     </div>
   </nav>
 
@@ -55,42 +45,28 @@
     {{ content | safe }}
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-about">
-          <h4>Savvy Recruiter</h4>
-          <p>Proof of Work Sourcing for ML and robotics hiring. Weekly research, playbooks, and tool benchmarks from Brendan Williams — AI Sourcing Specialist based in Manchester.</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="wm">savvy<span class="slash">/</span>recruiter</div>
+          <p>Proof of Work Sourcing for ML and robotics hiring. Weekly research, playbooks, and tool benchmarks from Brendan Williams — AI Sourcing Specialist, Manchester.</p>
         </div>
-        <div class="footer-email">
-          <h4>Get the Wednesday briefing</h4>
-          <p>One email, every Wednesday. Field-tested AI sourcing techniques, honest tool reviews, the week's best automation recipe. Free.</p>
-
-          <!-- ============================================================
-               FOOTER EMAIL CAPTURE — OPTIONAL
-               ============================================================
-               If you set up Beehiiv later and want to build an email list
-               quietly in the footer, paste the iframe embed code here,
-               replacing the .footer-embed-placeholder div below.
-               Leave as-is to keep the site pure free-resource (no email).
-               ============================================================ -->
-          <div class="footer-embed">
-            <div class="footer-embed-placeholder">
-              Email signup (optional) — paste Beehiiv iframe here when ready,<br>or leave empty to stay pure free-resource.
-            </div>
-          </div>
+        <div class="foot-col">
+          <h4>§ read</h4>
+          <a href="/newsletters/">Newsletter archive</a>
+          <a href="/playbooks/">Playbook library</a>
+          <a href="/about/">About</a>
+        </div>
+        <div class="foot-col">
+          <h4>§ connect</h4>
+          <a href="https://www.linkedin.com/in/sourcing-strategist/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/newsletters/">Subscribe</a>
         </div>
       </div>
-
-      <div class="footer-bottom">
-        <div class="footer-copy">
-          © {{ page.date | date('%Y') }} <strong>Savvy Recruiter</strong> · Brendan Williams
-        </div>
-        <ul class="footer-links">
-          <li><a href="https://www.linkedin.com/in/sourcing-strategist/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="/newsletters/">Archive</a></li>
-          <li><a href="/about/">About</a></li>
-        </ul>
+      <div class="foot-end">
+        <span>© {{ page.date | date('%Y') }} savvy/recruiter · Manchester</span>
+        <span class="si">proof over résumés.</span>
       </div>
     </div>
   </footer>
