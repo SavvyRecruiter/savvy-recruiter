@@ -20,6 +20,9 @@
   <!-- Shared stylesheet -->
   <link rel="stylesheet" href="/css/site.css">
 
+  <!-- Beehiiv attribution (tracks subscribe-form signups) -->
+  <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+
   <!-- Favicon — s/ slash mark on teal -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2319D5C5'/%3E%3Ctext x='32' y='46' font-family='Geist,sans-serif' font-size='44' font-weight='400' text-anchor='middle' fill='%230A0E0D'%3E/%3C/text%3E%3C/svg%3E">
 </head>
@@ -36,7 +39,7 @@
         <a href="/newsletters/" {% if page.url.startsWith('/newsletters') %}aria-current="page"{% endif %}>Newsletter</a>
         <a href="/playbooks/" {% if page.url.startsWith('/playbooks') %}aria-current="page"{% endif %}>Playbooks</a>
         <a href="/about/" {% if page.url.startsWith('/about') %}aria-current="page"{% endif %}>About</a>
-        <a href="/newsletters/" class="cta">Subscribe →</a>
+        <a href="/subscribe/" class="cta">Subscribe →</a>
       </div>
     </div>
   </nav>
@@ -61,7 +64,7 @@
         <div class="foot-col">
           <h4>§ connect</h4>
           <a href="https://www.linkedin.com/in/sourcing-strategist/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="/newsletters/">Subscribe</a>
+          <a href="/subscribe/">Subscribe</a>
         </div>
       </div>
       <div class="foot-end">
